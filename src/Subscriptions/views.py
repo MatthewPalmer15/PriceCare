@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from Subscriptions.forms import CreateSubscription
+from Subscriptions.forms import SubscriptionForm
 from .models import Subscription
 from .bgprocess import calculate_monthly_total, calculate_weekly_total, calculate_yearly_total
 
@@ -21,7 +21,7 @@ def dashboard(request):
 def create_subscription(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = CreateSubscription(request.POST)
+            form = SubscriptionForm(request.POST)
             if form.is_valid():
                 form.save(commit=False)
                 form.instance.user = request.user
@@ -32,7 +32,7 @@ def create_subscription(request):
                 messages.error(request, 'Subscription could not be added', extra_tags='danger')
                 return render(request, 'subscriptions/create.html', {'form': form})
         else:
-            form = CreateSubscription()
+            form = SubscriptionForm()
             return render(request, 'subscriptions/create.html', {'form': form})
     else:
         messages.error(request, 'You must be logged in to view this page', extra_tags='danger')
@@ -51,3 +51,25 @@ def delete_subscription(request, id):
         messages.error(request, 'You must be logged in to view this page', extra_tags='danger')
         return redirect('users_login')
 
+def edit_subscription(request, id):
+    if request.user.is_authenticated:
+        subscription = Subscription.objects.get(id=id)
+        if subscription.user == request.user:
+            if request.method == 'POST':
+                form = SubscriptionForm(request.POST, instance=subscription)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, 'Subscription updated successfully', extra_tags='success')
+                    return redirect('subs_dashboard')
+                else:
+                    messages.error(request, 'Subscription could not be updated', extra_tags='danger')
+                    return render(request, 'subscriptions/edit.html', {'form': form})
+            else:
+                form = SubscriptionForm(instance=subscription)
+                return render(request, 'subscriptions/edit.html', {'form': form})
+        else:
+            messages.error(request, 'Subscription could not be updated', extra_tags='danger')
+            return redirect('subs_dashboard')
+    else:
+        messages.error(request, 'You must be logged in to view this page', extra_tags='danger')
+        return redirect('users_login')

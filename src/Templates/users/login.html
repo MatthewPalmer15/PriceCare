@@ -11,14 +11,14 @@
 {% endif %}
 
 <form method="post" class="form-vertical">
-    <p class="fs-3 fw-bold text-center text-white">Log into an Existing Account</p>
+    <p class="fs-3 fw-bold text-center">Log into an Existing Account</p>
     {% csrf_token %}
     <input class="form-control form-resize mx-auto my-2" name="username" type="username" placeholder="Username"/>
     <input class="form-control form-resize mx-auto my-2" name="password" type="password" placeholder="Password"/>
     
     <div class="text-center">
         <input class="btn btn-dark px-3 my-2" type="submit" value="Log In">
-        <a class="d-block link-light my-2" href="{% url 'users_register' %}">Not Registered? Sign-up Here.</a>
+        <a class="d-block link-dark my-2" href="{% url 'users_register' %}">Not Registered? Sign-up Here.</a>
     </div>
 </form>
 {% endblock %}

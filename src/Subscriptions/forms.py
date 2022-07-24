@@ -2,7 +2,7 @@ from django import forms
 from .models import Subscription, Provider, Frequency
 
 
-class CreateSubscription(forms.ModelForm):
+class SubscriptionForm(forms.ModelForm):
 	class Meta:
 		model = Subscription
 		fields = ['provider', 'amount', 'frequency']
@@ -24,4 +24,3 @@ class CreateSubscription(forms.ModelForm):
 						queryset=Frequency.objects.all(),
 						widget=forms.Select(attrs={'class': 'form-control form-resize mx-auto my-2'}) 
 				)
-

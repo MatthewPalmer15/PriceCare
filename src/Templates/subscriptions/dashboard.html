@@ -61,26 +61,26 @@
                 <td>£{{subscription.amount}}</td>
                 <td>{{subscription.frequency}}</td>
                 <td>
-                    <a href="#" class="btn btn-outline-light">Edit</a>
-                    <button  class="btn btn-outline-light" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_subscription">
+                    <a href="{% url 'subs_edit' subscription.id %}" class="btn btn-outline-light btn-resize">Edit</a>
+                    <button  class="btn btn-outline-light btn-resize" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_subscription_{{subscription.id}}">
                         Delete
                     </button>
                 </td>
             </tr>
             <!-- DELETE SUBSCRIPTION MODAL -->
-            <div class="modal" tabindex="-1" id="delete_subscription">
+            <div class="modal fade" id="delete_subscription_{{subscription.id}}" tabindex="-1" aria-labelledby="delete_subscription_label" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete Subscription</h5>
+                            <h5 class="modal-title" id="leaveTeamModalLabel">Delete Subscription</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure you would like to delete the subscription for {{subscription.provider.name}}?</p>
+                            Are you sure you want to delete this subscription for {{subscription.provider.name}} for £{{subscription.amount}}/{{subscription.frequency}}?
                         </div>
-                        <div class="modal-footer mx-auto">
-                            <a class="btn btn-success px-4" href="{% url 'subs_delete' subscription.id %}">Yes</a>
-                            <a class="btn btn-danger px-4" data-bs-dismiss="modal">No</a>
+                        <div class="modal-footer">
+                            <a class="btn btn-success w-100 mb-1" href="{% url 'subs_delete' subscription.id %}"><i class="bi bi-box-arrow-right mx-2"></i>Yes</a>
+                            <button class="btn btn-danger w-100" data-bs-dismiss="modal"><i class="bi bi-x-lg mx-2"></i>No</button>
                         </div>
                     </div>
                 </div>

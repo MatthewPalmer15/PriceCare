@@ -12,7 +12,7 @@
 {% endif %}
 
 <form method="post" class="form-vertical my-2" enctype='multipart/form-data'>
-    <p class="fs-3 fw-bold text-center text-white">Create a New Account</p>
+    <p class="fs-3 fw-bold text-center">Create a New Account</p>
     {% csrf_token %}
 
     {{form.username}}
@@ -27,7 +27,7 @@
 
     <div class="text-center">
         <input class="btn btn-dark px-3 my-2" type="submit" value="Register">
-        <a class="d-block link-light my-2" href="{% url 'users_login' %}">Registered Already? Log-in Here.</a>
+        <a class="d-block link-dark my-2" href="{% url 'users_login' %}">Registered Already? Log-in Here.</a>
     </div>
 </form>
 {% endblock %}

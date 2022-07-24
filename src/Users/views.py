@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from Users.forms import CreateUser
 
+def view_user(request):
+    return render(request, "users/view.html", {})
+
 def register_user(request):
     if request.user.is_authenticated:
         redirect("/")

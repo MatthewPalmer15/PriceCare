@@ -1,8 +1,10 @@
+from django.http import FileResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from Subscriptions.forms import SubscriptionForm
 from .models import Subscription
 from .bgprocess import calculate_monthly_total, calculate_weekly_total, calculate_yearly_total
+from datetime import datetime
 
 def dashboard(request):
     if request.user.is_authenticated:
@@ -73,3 +75,22 @@ def edit_subscription(request, id):
     else:
         messages.error(request, 'You must be logged in to view this page', extra_tags='danger')
         return redirect('users_login')
+
+from docxtpl import DocxTemplate
+
+def download_statement(request):
+    subscriptions = Subscription.objects.filter(user=request.user).order_by('provider__name')
+    doc = DocxTemplate("Static/invoices/template.docx")
+    context = {
+        'user': request.user,
+        'subscriptions': subscriptions,
+        'current_date': '{:%d %B %Y}'.format(datetime.now()),
+        'weekly_total': calculate_weekly_total(subscriptions),
+        'monthly_total': calculate_monthly_total(subscriptions),
+        'yearly_total': calculate_yearly_total(subscriptions),
+    }
+    doc.render(context)
+    doc.save(f"Static/invoices/{request.user.username}_invoice_{'{:%d-%b-%Y}'.format(datetime.now())}.docx")
+    filename = f"Static/invoices/{request.user.username}_invoice_{'{:%d-%b-%Y}'.format(datetime.now())}.docx"
+    response = FileResponse(open(filename, 'rb'))
+    return response

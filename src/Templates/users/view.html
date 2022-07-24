@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{request.user.username}}'s Profile{% endblock %}
+{% block content %}
+<div class="d-block">
+    <img src="{{request.user.profilepic.url}}" class="img-fluid rounded-circle" alt="Profile Picture" width="75" height="75">
+    <span class="h5 mx-2 fw-bold">{{user.username}}</span>
+</div>
+
+<table class="table my-4">
+    <tbody>
+        <tr>
+            <th scope="row">Username</th>
+            <td>{{request.user.username}}</td>
+        </tr>
+        <tr>
+            <th scope="row">First Name</th>
+            <td>{{request.user.first_name}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Last Name</th>
+            <td>{{request.user.last_name}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td>{{request.user.email}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Admin Status</th>
+            <td>{{request.user.is_superuser}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between">
+    <span>
+        <a class="btn btn-secondary">Change Password</a>
+        <a class="btn btn-primary">Change Details</a>
+    </span>
+    <a class="btn btn-danger">Delete Account</a>
+</div>
+{% endblock %}

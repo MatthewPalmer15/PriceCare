@@ -41,7 +41,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-light text-dark px-3 m-1" aria-current="page" href="#">
+                            <a class="nav-link btn btn-light text-dark px-3 m-1" aria-current="page" href="{% url 'users_profile' %}">
                                 <img class="rounded-circle me-1" src="{{user.profilepic.url}}" width="25px">
                                 {{user.username}}
                             </a>

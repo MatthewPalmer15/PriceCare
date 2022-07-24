@@ -1,7 +1,7 @@
-PRICECARE
+PriceCare: Take care of your finances
 
-Manage Subscriptions (see what your weekly, monthly and yearly cost is)
-Manage costs with ease (for free!)
+- Free Service (?)
+- Allows users to see their weekly, monthly and yearly costs
 
 
 NEED TO ADD:
@@ -14,3 +14,4 @@ Red Cable Club
 Skill Share
 Sky
 Sketch
+Phone Companies

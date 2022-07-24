@@ -1,0 +1,12 @@
+# Ignore Cache Files and Migrations
+__pycache__/
+migrations/
+
+# Ignore Stored Data
+src/Static/images/profilepics/
+*.sqlite3
+*.png
+*.sqlite3
+*.JPG
+*.sqlite3
+*.docx

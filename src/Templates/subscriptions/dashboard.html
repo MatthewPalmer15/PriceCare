@@ -41,50 +41,52 @@
 </table>
 
 <!-- SUBSCRIPTION TABLE -->
-<table class="table align-middle my-3">
-    <thead class="table-dark">
-        <tr class="text-center">
-            <th scope="col" style="width:25%;">Service</th>
-            <th scope="col" style="width:25%;">Price</th>
-            <th scope="col" style="width:25%;">Frequency</th>
-            <th scope="col" style="width:25%;">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for subscription in subscriptions %}
-        <tr class="text-center text-light" style="background-color:{{subscription.provider.colour}}">
-            <th scope="row">
-                <img class="d-block mx-auto" src="{{subscription.provider.image.url}}" alt="{{subscription.provider.name}}" width="60" height="60">
-                <span>{{subscription.provider.name}}</span>
-            </th>
-            <td>£{{subscription.amount}}</td>
-            <td>{{subscription.frequency}}</td>
-            <td>
-                <a href="#" class="btn btn-outline-light">Edit</a>
-                <button  class="btn btn-outline-light" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_subscription">
-                    Delete
-                </button>
-            </td>
-        </tr>
-        <!-- DELETE SUBSCRIPTION MODAL -->
-        <div class="modal" tabindex="-1" id="delete_subscription">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Delete Subscription</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you would like to delete the subscription for {{subscription.provider.name}}?</p>
-                    </div>
-                    <div class="modal-footer mx-auto">
-                        <a class="btn btn-success px-4" href="{% url 'subs_delete' subscription.id %}">Yes</a>
-                        <a class="btn btn-danger px-4" data-bs-dismiss="modal">No</a>
+{% if subscriptions %}
+    <table class="table align-middle my-3">
+        <thead class="table-dark">
+            <tr class="text-center">
+                <th scope="col" style="width:25%;">Service</th>
+                <th scope="col" style="width:25%;">Price</th>
+                <th scope="col" style="width:25%;">Frequency</th>
+                <th scope="col" style="width:25%;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subscription in subscriptions %}
+            <tr class="text-center text-light" style="background-color:{{subscription.provider.colour}}">
+                <th scope="row">
+                    <img class="d-block mx-auto" src="{{subscription.provider.image.url}}" alt="{{subscription.provider.name}}" width="60" height="60">
+                    <span>{{subscription.provider.name}}</span>
+                </th>
+                <td>£{{subscription.amount}}</td>
+                <td>{{subscription.frequency}}</td>
+                <td>
+                    <a href="#" class="btn btn-outline-light">Edit</a>
+                    <button  class="btn btn-outline-light" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_subscription">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            <!-- DELETE SUBSCRIPTION MODAL -->
+            <div class="modal" tabindex="-1" id="delete_subscription">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Subscription</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you would like to delete the subscription for {{subscription.provider.name}}?</p>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <a class="btn btn-success px-4" href="{% url 'subs_delete' subscription.id %}">Yes</a>
+                            <a class="btn btn-danger px-4" data-bs-dismiss="modal">No</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    </tbody>
-</table>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 {% endblock %}

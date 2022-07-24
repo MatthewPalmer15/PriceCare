@@ -1,0 +1,4 @@
+[MASTER]
+profile=no
+persistent=yes
+ignore=tests.py, urls.py, migrations, __init__.py

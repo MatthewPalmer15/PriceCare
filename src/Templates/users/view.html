@@ -2,6 +2,15 @@
 {% load static %}
 {% block title %}{{request.user.username}}'s Profile{% endblock %}
 {% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.extra_tags }} m-1">
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
+
 <div class="d-block">
     <img src="{{request.user.profilepic.url}}" class="img-fluid rounded-circle" alt="Profile Picture" width="75" height="75">
     <span class="h5 mx-2 fw-bold">{{user.username}}</span>
@@ -34,9 +43,31 @@
 
 <div class="d-flex justify-content-between">
     <span>
-        <a class="btn btn-secondary">Change Password</a>
-        <a class="btn btn-primary">Change Details</a>
+        <a href="{% url 'users_change_password' %}" class="btn btn-secondary">Change Password</a>
+        <a href="{% url 'users_change_details' %}" class="btn btn-primary">Change Details</a>
     </span>
-    <a class="btn btn-danger">Delete Account</a>
+    <button  class="btn btn-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_user">
+        Delete Account
+    </button>
+</div>
+
+
+ <!-- DELETE USER ACCOUNT MODAL -->
+ <div class="modal fade" id="delete_user" tabindex="-1" aria-labelledby="delete_subscription_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leaveTeamModalLabel">Delete Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your account? This action cannot be undone. All your data will be lost. This includes your teams, subscriptions, and all of your data.
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success w-100 mb-1" href="{% url 'users_delete' %}"><i class="bi bi-box-arrow-right mx-2"></i>Yes</a>
+                <button class="btn btn-danger w-100" data-bs-dismiss="modal"><i class="bi bi-x-lg mx-2"></i>No</button>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

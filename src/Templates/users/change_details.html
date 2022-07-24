@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Change Details{% endblock %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.extra_tags }} m-1">
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post" class="form-vertical my-2" enctype='multipart/form-data'>
+    <p class="fs-3 fw-bold text-center">Change Account Details</p>
+    {% csrf_token %}
+
+    {{form.username}}
+    {{form.first_name}}
+    {{form.last_name}}
+    {{form.email}}
+    {{form.profilepic}}
+    <span id="upload_image_container" class="form-control form-resize mx-auto my-2">
+        <img id="upload_image" class="rounded-circle mx-auto" src="{% static 'images/profilepics/default.png' %}" width="50" height="50"/>
+        <span id="reg_username" class="mx-2"></span>
+    </span>
+
+    <div class="text-center">
+        <input class="btn btn-dark px-3 my-2" type="submit" value="Register">
+    </div>
+</form>
+{% endblock %}

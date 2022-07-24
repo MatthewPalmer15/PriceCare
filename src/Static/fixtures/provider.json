@@ -1,0 +1,306 @@
+[
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 1, 
+        "fields": {
+            "name": "Netflix", 
+            "image": "Static/images/providers/netflix.png", 
+            "colour": "#F40612"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 2, 
+        "fields": {
+            "name": "Adobe", 
+            "image": "Static/images/providers/adobe.png", 
+            "colour": "#FA0F00"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 3, 
+        "fields": {
+            "name": "Amazon", 
+            "image": "Static/images/providers/amazon.png", 
+            "colour": "#050407"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 4, 
+        "fields": {
+            "name": "Apple", 
+            "image": "Static/images/providers/apple.png", 
+            "colour": "#828282"
+        }   
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 5, 
+        "fields": {
+            "name": "Audible", 
+            "image": "Static/images/providers/audible.png", 
+            "colour": "#FB9821"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 6, 
+        "fields": {
+            "name": "BitWarden", 
+            "image": "Static/images/providers/bitwarden.png", 
+            "colour": "#175EDC"
+        }
+    }, {
+        "model": "Subscriptions.provider", 
+        "pk": 7, 
+        "fields": {
+            "name": "Deezer", 
+            "image": "Static/images/providers/deezer.png", 
+            "colour": "#991962"
+        }
+    }, {
+        "model": "Subscriptions.provider", 
+        "pk": 8, 
+        "fields": {
+            "name": "Discord", 
+            "image": "Static/images/providers/discord.png", 
+            "colour": "#4F7FE0"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 9, 
+        "fields": {
+            "name": "Disney+", 
+            "image": "Static/images/providers/disney.png", 
+            "colour": "#152867"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 10, 
+        "fields": {
+            "name": "Dropbox", 
+            "image": "Static/images/providers/dropbox.png", 
+            "colour": "#007DE4"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 11, 
+        "fields": {
+            "name": "Duolingo", 
+            "image": "Static/images/providers/duolingo.png", 
+            "colour": "#33CA01"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+            "pk": 12, 
+            "fields": {
+                "name": "Figma", 
+                "image": "Static/images/providers/figma.png", 
+                "colour": "#FF7362"
+                }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 13, 
+        "fields": {
+            "name": "FitBit", 
+            "image": "Static/images/providers/fitbit.png", 
+            "colour": "#49AEB5"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 14, 
+        "fields": {
+            "name": "Flickr", 
+            "image": "Static/images/providers/flickr.png", 
+            "colour": "#1D76CE"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 15, 
+        "fields": {
+            "name": "GitHub", 
+            "image": "Static/images/providers/github.png", 
+            "colour": "#652A85"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 16, 
+        "fields": {
+            "name": "Google", 
+            "image": "Static/images/providers/google.png", 
+            "colour": "#67A850"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 17, 
+        "fields": {
+            "name": "HBO", 
+            "image": "Static/images/providers/hbo.png", 
+            "colour": "#000000"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 18, 
+        "fields": {
+            "name": "Hulu", 
+            "image": "Static/images/providers/hulu.png", 
+            "colour": "#01D18C"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 19, 
+        "fields": {
+            "name": "iCloud", 
+            "image": "Static/images/providers/icloud.png", 
+            "colour": "#5CADF8"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider",
+        "pk": 20, 
+        "fields": {
+            "name": "LinkTree", 
+            "image": "Static/images/providers/linktree.png", 
+            "colour": "#28C078"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 21, 
+        "fields": {
+            "name": "Microsoft", 
+            "image": "Static/images/providers/microsoft.png", 
+            "colour": "#02A4F2"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 22, 
+        "fields": {
+            "name": "Nintendo", 
+            "image": "Static/images/providers/nintendo_switch.png", 
+            "colour": "#E00101"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 23, 
+        "fields": {
+            "name": "NordVPN", 
+            "image": "Static/images/providers/nordvpn.png",
+            "colour": "#145077"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 24, 
+        "fields": {
+            "name": "OneDrive", 
+            "image": "Static/images/providers/onedrive.png", 
+            "colour": "#0565B8"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 25, 
+        "fields": {
+            "name": "PayPal", 
+            "image": "Static/images/providers/paypal.png", 
+            "colour": "#283469"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 26, 
+        "fields": {
+            "name": "PlayStation",
+            "image": "Static/images/providers/playstation.png", 
+            "colour": "#004098"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 27, 
+        "fields": {
+            "name": "Slack", 
+            "image": "Static/images/providers/slack.png", 
+            "colour": "#E3AA1E"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 28, 
+        "fields": {
+            "name": "SoundCloud", 
+            "image": "Static/images/providers/soundcloud.png", 
+            "colour": "#F86B11"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 29, 
+        "fields": {
+            "name": "Spotify", 
+            "image": "Static/images/providers/spotify.png", 
+            "colour": "#23D061"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 30, 
+        "fields": {
+            "name": "Stadia", 
+            "image": "Static/images/providers/stadia.png", 
+            "colour": "#BC184F"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 31,
+        "fields": {
+            "name": "Twitch", 
+            "image": "Static/images/providers/twitch.png", 
+            "colour": "#9047FF"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 32, 
+        "fields": {
+            "name": "Uber", 
+            "image": "Static/images/providers/uber.png", 
+            "colour": "#000000"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 33, 
+        "fields": {
+            "name": "Xbox", 
+            "image": "Static/images/providers/xbox.png", 
+            "colour": "#117B0F"
+        }
+    }, 
+    {
+        "model": "Subscriptions.provider", 
+        "pk": 34, 
+        "fields": {
+            "name": "YouTube", 
+            "image": "Static/images/providers/youtube.png", 
+            "colour": "#CF1F1F"
+        }
+    }
+]

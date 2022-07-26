@@ -1,4 +1,10 @@
+def format_date(date):
+    """ Format a date to a string """
+    return '{:%d %B %Y}'.format(date)
+
+
 def calculate_weekly_total(subscriptions):
+    """ Calculate the total amount of money paid per week """
     total = 0
     for subscription in subscriptions:
         if subscription.frequency.name == "1 week":
@@ -17,6 +23,7 @@ def calculate_weekly_total(subscriptions):
 
 
 def calculate_monthly_total(subscriptions):
+    """ Calculate the total amount of money paid per month """
     total = 0
     for subscription in subscriptions:
         if subscription.frequency.name == "1 week":
@@ -35,6 +42,7 @@ def calculate_monthly_total(subscriptions):
 
 
 def calculate_yearly_total(subscriptions):
+    """ Calculate the total amount of money paid per year """
     total = 0
     for subscription in subscriptions:
         if subscription.frequency.name == "1 week":

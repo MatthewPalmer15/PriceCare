@@ -4,9 +4,11 @@ from django.contrib import messages
 from Users.forms import CreateUser, EditUserDetails, EditUserPassword
 
 def view_user(request):
+    """ Views the user profile """
     return render(request, "users/view.html", {})
 
 def register_user(request):
+    """ Registers a new user """
     if request.user.is_authenticated:
         redirect("/")
     if request.method == "POST":
@@ -23,6 +25,7 @@ def register_user(request):
         return render(request, "users/register.html", {'form': form})
 
 def login_user(request):
+    """ Logs in an existing user """
     if request.user.is_authenticated:
         redirect("/")
     if request.method == "POST":
@@ -31,21 +34,23 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, f"You are now logged in as {request.user.username}", extra_tags='success')        
+            messages.success(request, f"You are now logged in as {request.user.username}", extra_tags='success')
             return redirect("/")
         else:
             messages.error(request, "Invalid Username or Password. Please Try Again", extra_tags='danger')
-            return render(request, 'users/login.html', {"error_message":"Account has not been found. Please Try again"})
+            return render(request, 'users/login.html', {})
     else:
         return render(request, 'users/login.html', {})
 
 def logout_user(request):
+    """ Logs out the user """
     logout(request=request)
     request.session.clear()
     messages.success(request, "You have been logged out", extra_tags='success')
     return redirect("/")
 
 def delete_user(request):
+    """ Deletes the current user'sa account """
     if request.user.is_authenticated:
         request.user.delete()
         messages.success(request, "Your account has been deleted", extra_tags='success')
@@ -55,6 +60,7 @@ def delete_user(request):
         return redirect("/")
 
 def change_user_details(request):
+    """ Changes the user's details """
     if request.user.is_authenticated:
         if request.method == "POST":
             form = EditUserDetails(request.POST, request.FILES, instance=request.user)
@@ -74,6 +80,7 @@ def change_user_details(request):
         return redirect("/")
 
 def change_user_password(request):
+    """ Changes the user's password """
     if request.user.is_authenticated:
         if request.method == "POST":
             form = EditUserPassword(request.user, request.POST)

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Subscriptions', 
+    'Subscriptions',
     'Users',
     'colorfield',
     'django_cleanup.apps.CleanupConfig',

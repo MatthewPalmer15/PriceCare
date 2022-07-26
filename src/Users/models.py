@@ -3,8 +3,10 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 class CustomAccountManager(BaseUserManager):
+    """ Create either a normal user or a superuser """
     # Creating a normal user
     def create_user(self, email, password, **extra_fields):
+        """ Create and save a new user """
         if not email:
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
@@ -15,6 +17,7 @@ class CustomAccountManager(BaseUserManager):
 
     # Creating a superuser
     def create_superuser(self, email, password, **extra_fields):
+        """ Create and save a new superuser """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -26,15 +29,41 @@ class CustomAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    id           = models.AutoField(primary_key=True)
-    profilepic   = models.ImageField(upload_to='Static/images/profilepics/', default='Static/images/profilepics/default.png', blank=True, null=True)
-    username     = models.CharField(max_length=32, unique=True)
-    first_name   = models.CharField(max_length=64)
-    last_name    = models.CharField(max_length=64)
-    email        = models.EmailField(max_length=128, unique=True)
-    password     = models.CharField(max_length=8192)
-    is_staff     = models.BooleanField(_('staff'), default=False)
-    is_active    = models.BooleanField(_('active'), default=True)
+    """ The user account model that is used by the authentication system """
+    id          = models.AutoField(
+                    primary_key=True
+                )
+    profilepic  = models.ImageField(
+                    upload_to='Static/images/profilepics/',
+                    default='Static/images/profilepics/default.png',
+                    blank=True,
+                    null=True
+                )
+    username    = models.CharField(
+                    max_length=32,
+                    unique=True
+                )
+    first_name  = models.CharField(
+                    max_length=64
+                )
+    last_name   = models.CharField(
+                    max_length=64
+                )
+    email       = models.EmailField(
+                    max_length=128,
+                    unique=True
+                )
+    password    = models.CharField(
+                    max_length=512
+                )
+    is_staff    = models.BooleanField(
+                    _('staff'),
+                    default=False
+                )
+    is_active   = models.BooleanField(
+                    _('active'),
+                    default=True
+                )
 
     # This tells django to use the email as the main sign in field.
     USERNAME_FIELD = 'username'

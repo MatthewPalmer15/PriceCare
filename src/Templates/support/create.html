@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.extra_tags }} m-1">
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post" class="form-vertical my-2" enctype='multipart/form-data'>
+    <p class="fs-3 fw-bold text-center">Create a New Account</p>
+    {% csrf_token %}
+
+    {{form.subject}}
+    {{form.message}}
+    {{form.file}}
+
+    <div class="text-center">
+        <input class="btn btn-dark px-3 my-2" type="submit" value="Register">
+    </div>
+</form>
+{% endblock %}

@@ -1,7 +1,9 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
-from Users.forms import CreateUser, EditUserDetails, EditUserPassword
+from .forms import CreateUser, EditUserDetails, EditUserPassword, SupportTicketResponseForm, SupportTicketForm
+from .models import SupportTicket
 
 def view_user(request):
     """ Views the user profile """
@@ -97,6 +99,72 @@ def change_user_password(request):
         else:
             form = EditUserPassword(user=request.user)
             return render(request, "users/change_password.html", {'form': form})
+    else:
+        messages.error(request, "You are not logged in", extra_tags='danger')
+        return redirect("/")
+
+
+def view_support(request):
+    """ Views the support page """
+    if request.user.is_authenticated:
+        support_tickets = SupportTicket.objects.filter(user=request.user).order_by('is_closed', '-created_at')
+
+        if request.method == "POST":
+            form = SupportTicketResponseForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.ticket = SupportTicket.objects.get(id=request.POST['ticket_id'])
+                form.instance.user = request.user
+                form.instance.created_at = datetime.now()
+                form.save()
+                messages.success(request, "Your response has been submitted", extra_tags='success')
+                return redirect("users_support")
+            else:
+                for error in form.errors:
+                    messages.error(request, form.errors[error][0], extra_tags='danger')
+                return render(request, "users/support.html", {'form': form, 'support_tickets': support_tickets})
+        else:
+            form = SupportTicketResponseForm()
+            context = {
+                'support_tickets': support_tickets,
+                'form': form,
+            }
+            return render(request, "support/view.html", context)
+    else:
+        messages.error(request, "You are not logged in", extra_tags='danger')
+        return redirect("/")
+
+def create_support_ticket(request):
+    """ Creates a new support ticket """
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = SupportTicketForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.user = request.user
+                form.instance.created_at = datetime.now()
+                form.save()
+                messages.success(request, "Your support ticket has been submitted", extra_tags='success')
+                return redirect("users_support")
+            else:
+                for error in form.errors:
+                    messages.error(request, form.errors[error][0], extra_tags='danger')
+                return render(request, "support/create.html", {'form': form})
+        else:
+            form = SupportTicketForm()
+            return render(request, "support/create.html", {'form': form})
+    else:
+        messages.error(request, "You are not logged in", extra_tags='danger')
+        return redirect("/")
+
+def close_support_ticket(request, ticket_id):
+    """ Closes a support ticket """
+    if request.user.is_authenticated:
+        ticket = SupportTicket.objects.get(user=request.user, id=ticket_id)
+        ticket.is_closed = True
+        ticket.save()
+        messages.success(request, "Your ticket has been closed", extra_tags='success')
+        return redirect("users_support")
     else:
         messages.error(request, "You are not logged in", extra_tags='danger')
         return redirect("/")

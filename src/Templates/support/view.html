@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Support{% endblock %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.extra_tags }}">
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="d-flex justify-content-between my-3">
+    <span>
+        <span class="fs-5 fw-bold">Active Tickets</span>
+        <span class="badge bg-dark fs-6 mx-1">{{support_tickets.count}}</span>
+    </span>
+    <a class="btn btn-success" href="#">Create Ticket</a>
+</div>
+
+{% for support_ticket in support_tickets %}
+<div class="accordion" id="accordion_{{support_ticket.id}}">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush_head_{{support_ticket.id}}">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{support_ticket.id}}" aria-expanded="false" aria-controls="flush-{{support_ticket.id}}">
+                <span>Ticket No. {{support_ticket.id}} - {{support_ticket.subject}}</span>
+                
+                {% if not support_ticket.is_closed %}
+                    <span class="badge bg-success mx-2">Open</span>
+                {% else %}
+                    <span class="badge bg-danger mx-2">Closed</span>
+                {% endif %}
+            </button>
+        </h2>
+    <div id="flush-{{support_ticket.id}}" class="accordion-collapse collapse" aria-labelledby="flush_head_{{support_ticket.id}}" data-bs-parent="#accordion_{{support_ticket.id}}">
+        <div class="accordion-body">
+            <div class="container my-2">
+                <div class="d-flex justify-content-between">
+                    <span class="fw-bold">
+                        <img class="rounded-circle me-2" src={{support_ticket.user.profilepic.url}} width="25" height="25">
+                        {{support_ticket.user.username}}
+                    </span>
+                    <span class="text-secondary">
+                        Created at {{support_ticket.created_at|date:"d/m/Y H:i:s"}}
+                    </span>
+                </div>
+                <div class="d-block">
+                    {{support_ticket.message}}
+                </div>
+                {% if support_ticket.file %}
+                <div class="d-block">
+                    <div class="d-flex justify-content-between align-items-center fs-6 fw-bold bg-dark p-2 my-2 rounded-3 text-white">
+                        <span>
+                            <i class="bi bi-file-earmark-fill"></i>
+                            {{support_ticket.filename}} [{{support_ticket.filesize}}] KB
+                        </span>
+                        <a href="#" download="{{response.file.name}}" class="btn btn-success">
+                            <i class="bi bi-cloud-download me-1"></i> Download
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% for response in support_ticket.responses %}
+            <div class="container my-2">
+                <div class="d-flex justify-content-between">
+                    <span class="fw-bold">
+                        <img class="rounded-circle me-2" src={{response.user.profilepic.url}} width="25" height="25">
+                        {{response.user.username}}
+                    </span>
+                    <span class="text-secondary">
+                        Responded at {{response.created_at|date:"d/m/Y H:i:s"}}
+                    </span>
+                </div>
+                <div class="d-block">
+                    {{response.message}}
+                </div>
+                {% if response.file %}
+                <div class="d-block">
+                    <div class="d-flex justify-content-between align-items-center fs-6 fw-bold bg-dark p-2 my-2 rounded-3 text-white">
+                        <span>
+                            <i class="bi bi-file-earmark-fill"></i>
+                            {{response.filename}} [{{response.filesize}}] KB
+                        </span>
+                        <a href="#" download="{{response.file.name}}" class="btn btn-success">
+                            <i class="bi bi-cloud-download me-1"></i> Download
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if not support_ticket.is_closed %}
+            <div class="container mt-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#send_message">Message</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#close_ticket">Close</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+ <!-- SEND MESSAGE MODAL -->
+ <div class="modal fade" id="send_message" tabindex="-1" aria-labelledby="delete_subscription_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" class="form-vertical my-2" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{form}}
+                <input type="hidden" name="ticket_id" value={{support_ticket.id}} readonly>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success w-100 mb-1" type="submit">Add Message</button>
+                </form>
+                <button class="btn btn-danger w-100" data-bs-dismiss="modal"><i class="bi bi-x-lg mx-2"></i>No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- SEND MESSAGE MODAL -->
+ <div class="modal fade" id="close_ticket" tabindex="-1" aria-labelledby="delete_subscription_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Close Support Ticket No. {{support_ticket.id}} - {{support_ticket.subject}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Would you like to close this support ticket? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success w-100 mb-1" href="{% url 'users_close_support' support_ticket.id %}">Yes</a>
+                <button class="btn btn-danger w-100" data-bs-dismiss="modal"><i class="bi bi-x-lg mx-2"></i>No</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

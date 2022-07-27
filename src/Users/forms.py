@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django import forms
-from .models import User
+from .models import User, SupportTicket, SupportTicketResponse
 
 class CreateUser(UserCreationForm):
 	""" Form for creating a new user """
@@ -161,6 +161,68 @@ class EditUserPassword(PasswordChangeForm):
 							attrs={
 								'class': 'form-control form-resize mx-auto my-2',
 								'placeholder': 'Confirm Password'
+							}
+						)
+					)
+
+class SupportTicketForm(forms.ModelForm):
+	""" Form for creating a support ticket """
+	class Meta:
+		model = SupportTicket
+		fields = ['subject', 'message', 'file']
+
+	subject			= forms.CharField(
+							max_length=64,
+							widget=forms.TextInput(
+								attrs={
+									'class': 'form-control form-resize mx-auto my-2',
+									'placeholder': 'Subject'
+								}
+							)
+						)
+	message			= forms.CharField(
+							required=True,
+							widget=forms.Textarea(
+								attrs={
+									'class': 'form-control form-resize mx-auto my-2',
+									'placeholder': 'Message'
+								}
+							)
+						)
+	file			= forms.FileField(
+							required=False,
+							widget=forms.FileInput(
+								attrs={
+									'class': 'form-control form-resize mx-auto my-2',
+									'accept': 'image/jpeg, image/png, application/pdf',
+									'onchange': 'read_image(this)'
+								}
+							)
+						)
+
+
+class SupportTicketResponseForm(forms.ModelForm):
+	""" Form for responding to a support ticket """
+	class Meta:
+		model = SupportTicketResponse
+		fields = ['message', 'file']
+	
+	message			= forms.CharField(
+						max_length=512,
+						required=True,
+						widget=forms.Textarea(
+							attrs={
+								'class': 'form-control mx-auto my-2',
+								'placeholder': 'Enter Message'
+							}
+						)
+					)
+	file 			= forms.FileField(
+						required=False,
+						widget=forms.FileInput(
+							attrs={
+								'class': 'form-control mx-auto my-2',
+								'accept': 'image/jpeg, image/png , application/pdf , application/msword , application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 							}
 						)
 					)

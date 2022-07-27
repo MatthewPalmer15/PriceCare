@@ -46,9 +46,12 @@
         <a href="{% url 'users_change_password' %}" class="btn btn-secondary">Change Password</a>
         <a href="{% url 'users_change_details' %}" class="btn btn-primary">Change Details</a>
     </span>
-    <button  class="btn btn-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_user">
-        Delete Account
-    </button>
+    <span>
+        <a class="btn btn-success" href="{% url 'users_support' %}">My Support</a>
+        <button  class="btn btn-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_user">
+            Delete Account
+        </button>
+    </span>
 </div>
 
 

@@ -16,8 +16,11 @@
         <span class="fs-5 fw-bold">Active Tickets</span>
         <span class="badge bg-dark fs-6 mx-1">{{support_tickets.count}}</span>
     </span>
-    <a class="btn btn-success" href="#">Create Ticket</a>
+    {% if not request.resolver_match.url_name == 'users_support_admin' %}
+        <a class="btn btn-success" href="{% url 'users_create_support' %}">Create Ticket</a>
+    {% endif %}
 </div>
+
 
 {% for support_ticket in support_tickets %}
 <div class="accordion" id="accordion_{{support_ticket.id}}">

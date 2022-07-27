@@ -134,6 +134,37 @@ def view_support(request):
         messages.error(request, "You are not logged in", extra_tags='danger')
         return redirect("/")
 
+def view_support_admin(request):
+    """ Views the support page """
+    if request.user.is_authenticated and request.user.is_superuser:
+        all_support_tickets = SupportTicket.objects.all().exclude(is_closed=True).order_by('-created_at')
+
+        if request.method == "POST":
+            form = SupportTicketResponseForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.ticket = SupportTicket.objects.get(id=request.POST['ticket_id'])
+                form.instance.user = request.user
+                form.instance.created_at = datetime.now()
+                form.save()
+                messages.success(request, "Your response has been submitted", extra_tags='success')
+                return redirect("users_support_admin")
+            else:
+                for error in form.errors:
+                    messages.error(request, form.errors[error][0], extra_tags='danger')
+                return render(request, "users/support.html", {'form': form, 'support_tickets': all_support_tickets})
+        else:
+            form = SupportTicketResponseForm()
+            context = {
+                'support_tickets': all_support_tickets,
+                'form': form,
+            }
+            return render(request, "support/view.html", context)
+    else:
+        messages.error(request, "You do not have the permissions for this", extra_tags='danger')
+        return redirect("/")
+
+
 def create_support_ticket(request):
     """ Creates a new support ticket """
     if request.user.is_authenticated:

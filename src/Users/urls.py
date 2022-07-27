@@ -10,7 +10,8 @@ urlpatterns = [
     path('change/details', views.change_user_details, name='users_change_details'),
     path('change/password', views.change_user_password, name='users_change_password'),
 
+    path('support/admin', views.view_support_admin, name='users_support_admin'),
     path('support/', views.view_support, name="users_support"),
-    path('support/create/', views.create_support_ticket, name="usrers_create_support"),
+    path('support/create/', views.create_support_ticket, name="users_create_support"),
     path('support/close/<int:ticket_id>', views.close_support_ticket, name="users_close_support"),
 ]

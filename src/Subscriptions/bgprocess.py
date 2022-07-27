@@ -1,9 +1,10 @@
-import pythoncom
 import os
+from pythoncom import CoInitialize
 from docx2pdf import convert
 
 def convert_to_pdf(file):
-    pythoncom.CoInitialize()
+    """ Convert a DOCX file to a PDF file """
+    CoInitialize()
     convert(file, file.replace('.docx', '.pdf'))
     os.remove(file)
     return file.replace('.docx', '.pdf')

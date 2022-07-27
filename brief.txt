@@ -1,17 +1,23 @@
-PriceCare: Take care of your finances
-
-- Free Service (?)
-- Allows users to see their weekly, monthly and yearly costs
+PriceCare Developer Notes (Current: v0.7)
 
 
-NEED TO ADD:
-Creative Cloud
-ExpressVPN
-Discovery + 
-Font Awesome
-Paramount+
-Red Cable Club
-Skill Share
-Sky
-Sketch
-Phone Companies
+--    FEATURES    --
+
+- Support Ticket System
+- Notification System
+- Home, About & Contact Page
+- Premium Service (Income?)
+- More Services
+- Footer (?)
+
+--    SERVICES    --
+- Creative Cloud
+- ExpressVPN
+- Discovery + 
+- Font Awesome
+- Paramount+
+- Red Cable Club
+- Skill Share
+- Sky
+- Sketch
+- Phone Companies

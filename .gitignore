@@ -10,3 +10,4 @@ src/Static/images/profilepics/
 *.JPG
 *.sqlite3
 *.docx
+*.pdf

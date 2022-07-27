@@ -15,11 +15,12 @@ def register_user(request):
         form = CreateUser(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your account has been created", extra_tags='success')
+            return redirect("/")
         else:
             for error in form.errors:
                 messages.error(request, form.errors[error][0], extra_tags='danger')
             return render(request, "users/register.html", {'form': form})
-        return redirect("/")
     else:
         form = CreateUser()
         return render(request, "users/register.html", {'form': form})

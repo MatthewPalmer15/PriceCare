@@ -57,6 +57,15 @@ class CreateUser(UserCreationForm):
 							}
 						)
 					)
+	agreement	= forms.BooleanField(
+				required=True,
+				widget=forms.CheckboxInput(
+					attrs={
+						'class': 'form-check-input mx-auto',
+						'label': 'Agreement'
+						}
+					)
+				)
 
 	def __init__(self, *args, **kwargs) -> None:
 		super(CreateUser, self).__init__(*args, **kwargs)

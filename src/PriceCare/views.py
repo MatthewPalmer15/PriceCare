@@ -11,3 +11,7 @@ def about(request):
 def contact(request):
     """ Render the contact page """
     return render(request, "main/contact.html", {})
+
+def policy(request):
+    """ Render the policy page """
+    return render(request, "main/policy.html", {})

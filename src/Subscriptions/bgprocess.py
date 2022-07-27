@@ -1,3 +1,13 @@
+import pythoncom
+import os
+from docx2pdf import convert
+
+def convert_to_pdf(file):
+    pythoncom.CoInitialize()
+    convert(file, file.replace('.docx', '.pdf'))
+    os.remove(file)
+    return file.replace('.docx', '.pdf')
+
 def format_date(date):
     """ Format a date to a string """
     return '{:%d %B %Y}'.format(date)

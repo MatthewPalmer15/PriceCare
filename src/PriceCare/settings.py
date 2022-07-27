@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Subscriptions',
     'Users',
     'colorfield',
+    'ckeditor',
     'django_cleanup.apps.CleanupConfig',
 ]
 

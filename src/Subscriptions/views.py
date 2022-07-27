@@ -1,4 +1,5 @@
 from datetime import datetime
+from lib2to3.pytree import convert
 from django.http import FileResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
@@ -91,6 +92,7 @@ def download_statement(request):
     """ Download a DOCX statement of the user's subscriptions """
     subscriptions = Subscription.objects.filter(user=request.user).order_by('provider__name')
     current_date = datetime.now()
+    file = f"Static/invoices/{request.user.username}'s PriceCare Statement ({format_date(current_date)}).docx"
     doc = DocxTemplate("Static/invoices/template.docx")
     context = {
         'user': request.user,
@@ -101,7 +103,8 @@ def download_statement(request):
         'yearly_total': calculate_yearly_total(subscriptions),
     }
     doc.render(context)
-    doc.save(f"Static/invoices/{request.user.username}_invoice_{format_date(current_date)}.docx")
-    filename = f"Static/invoices/{request.user.username}_invoice_{format_date(current_date)}.docx"
-    response = FileResponse(open(filename, 'rb'))
+    doc.save(file)
+    pdf_file = convert_to_pdf(file)
+    response = FileResponse(open(pdf_file, 'rb'), content_type='application/pdf')
     return response
+    

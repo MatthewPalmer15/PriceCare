@@ -206,7 +206,7 @@ class SupportTicketResponseForm(forms.ModelForm):
 	class Meta:
 		model = SupportTicketResponse
 		fields = ['message', 'file']
-	
+
 	message			= forms.CharField(
 						max_length=512,
 						required=True,

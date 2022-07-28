@@ -16,9 +16,12 @@
         <span class="fs-5 fw-bold">Active Tickets</span>
         <span class="badge bg-dark fs-6 mx-1">{{support_tickets.count}}</span>
     </span>
-    {% if not request.resolver_match.url_name == 'users_support_admin' %}
-        <a class="btn btn-success" href="{% url 'users_create_support' %}">Create Ticket</a>
-    {% endif %}
+    <span>
+        {% if not request.resolver_match.url_name == 'users_support_admin' %}
+            <a class="btn btn-primary mx-1 px-4" href="{% url 'users_profile' %}">Back</a>
+            <a class="btn btn-success" href="{% url 'users_create_support' %}">Create Ticket</a>
+        {% endif %}
+    </span>
 </div>
 
 
@@ -71,6 +74,9 @@
                     <span class="fw-bold">
                         <img class="rounded-circle me-2" src={{response.user.profilepic.url}} width="25" height="25">
                         {{response.user.username}}
+                        {% if response.user.is_bot %}
+                            <span class="badge bg-primary">Bot</span>
+                        {% endif %}
                     </span>
                     <span class="text-secondary">
                         Responded at {{response.created_at|date:"d/m/Y H:i:s"}}

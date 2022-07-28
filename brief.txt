@@ -1,9 +1,8 @@
-PriceCare Developer Notes (Current: v0.8)
+PriceCare Developer Notes (Current: v0.9)
 
 
 --    FEATURES    --
 
-- Notification System
 - Home, About & Contact Page
 - Premium Service (Income?)
 - More Services

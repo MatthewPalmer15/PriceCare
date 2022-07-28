@@ -1,4 +1,3 @@
-from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -65,6 +64,9 @@ class User(AbstractBaseUser, PermissionsMixin):
                     _('active'),
                     default=True
                 )
+    is_bot      = models.BooleanField(
+                    default=False
+                )
 
     # This tells django to use the email as the main sign in field.
     USERNAME_FIELD = 'username'
@@ -111,7 +113,7 @@ class SupportTicket(models.Model):
                 )
 
     def __str__(self):
-        return f"Ticket No. {self.id} - {self.subject}" 
+        return f"Ticket No. {self.id} - {self.subject}"
 
     @property
     def responses(self):

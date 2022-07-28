@@ -1,0 +1,17 @@
+[
+    {
+        "model": "Users.User", 
+        "pk": 1, 
+        "fields": {
+            "profilepic": "Static/images/profilepics/care-bot.png", 
+            "username": "Care Bot",
+            "first_name": "Care",
+            "last_name": "Bot",
+            "email": "carebot@steelsystems.uk",
+            "password": "carebot",
+            "is_staff": true,
+            "is_active": true,
+            "is_superuser": true
+        }
+    } 
+]

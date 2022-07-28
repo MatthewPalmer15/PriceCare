@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from .forms import CreateUser, EditUserDetails, EditUserPassword, SupportTicketResponseForm, SupportTicketForm
-from .models import SupportTicket
+from .models import User, SupportTicket, SupportTicketResponse
 
 def view_user(request):
     """ Views the user profile """
@@ -194,6 +194,12 @@ def close_support_ticket(request, ticket_id):
         ticket = SupportTicket.objects.get(user=request.user, id=ticket_id)
         ticket.is_closed = True
         ticket.save()
+        SupportTicketResponse.objects.create(
+            ticket=ticket,
+            user=User.objects.get(username="Care Bot"),
+            message="This ticket has been closed. You can no longer reply to it.",
+            created_at=datetime.now()
+        )
         messages.success(request, "Your ticket has been closed", extra_tags='success')
         return redirect("users_support")
     else:

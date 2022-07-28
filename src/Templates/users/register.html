@@ -24,8 +24,9 @@
         <img id="upload_image" class="rounded-circle mx-auto" src="{% static 'images/profilepics/default.png' %}" width="50" height="50"/>
         <span id="reg_username" class="mx-2"></span>
     </span>
-    {{form.agreement}} I have read and agree to the <a href="{% url 'policy' %}">Privacy Poilcy</a>
-    {{form.submit}}
+    <div class="text-center">
+        {{form.agreement}} I agree to the <a href="{% url 'policy' %}">Privacy Poilcy</a>
+    </div>
     <div class="text-center">
         <input class="btn btn-dark px-3 my-2" type="submit" value="Register">
         <a class="d-block link-dark my-2" href="{% url 'users_login' %}">Registered Already? Log-in Here.</a>

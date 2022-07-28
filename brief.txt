@@ -1,9 +1,9 @@
-PriceCare Developer Notes (Current: v0.9)
+PriceCare Developer Notes (Current: v0.10)
 
 
 --    FEATURES    --
 
-- Home, About & Contact Page
+- About Page
 - Premium Service (Income?)
 - More Services
 - Footer (?)

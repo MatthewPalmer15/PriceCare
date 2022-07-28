@@ -1,6 +1,6 @@
 [
     {
-      "model": "Subscription.Frequency",
+      "model": "Subscriptions.Frequency",
       "pk": 1,
       "fields": {
         "name": "1 week",
@@ -8,7 +8,7 @@
       }
     },
     {
-        "model": "Subscription.Frequency",
+        "model": "Subscriptions.Frequency",
         "pk": 2,
         "fields": {
           "name": "2 weeks",
@@ -16,7 +16,7 @@
         }
     },
     {
-        "model": "Subscription.Frequency",
+        "model": "Subscriptions.Frequency",
         "pk": 3,
         "fields": {
           "name": "1 month",
@@ -24,7 +24,7 @@
         }
     },
     {
-        "model": "Subscription.Frequency",
+        "model": "Subscriptions.Frequency",
         "pk": 4,
         "fields": {
           "name": "3 months",
@@ -32,7 +32,7 @@
         }
     },
     {
-        "model": "Subscription.Frequency",
+        "model": "Subscriptions.Frequency",
         "pk": 5,
         "fields": {
           "name": "6 months",
@@ -40,7 +40,7 @@
         }
     },
     {
-        "model": "Subscription.Frequency",
+        "model": "Subscriptions.Frequency",
         "pk": 6,
         "fields": {
           "name": "1 year",

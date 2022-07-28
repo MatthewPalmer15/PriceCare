@@ -103,7 +103,12 @@ def download_statement(request):
     }
     doc.render(context)
     doc.save(file)
-    pdf_file = convert_to_pdf(file)
-    response = FileResponse(open(pdf_file, 'rb'), content_type='application/pdf')
-    return response
+    try:
+        pdf_file = convert_to_pdf(file)
+        print(pdf_file)
+        response = FileResponse(open(pdf_file, 'rb'), content_type='application/pdf')
+        return response
+    except:
+        messages.error(request, message='PDF could not be generated. Please try again', extra_tags='danger')
+        return redirect('subs_dashboard')
     

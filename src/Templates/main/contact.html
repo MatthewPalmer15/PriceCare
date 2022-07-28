@@ -3,6 +3,59 @@
 {% block title %}Contact{% endblock %}
 {% block content %}
 
-contact page
+<h3>Contact us for more information</h3>
+<table class="table my-4">
+    <tbody>
+        <tr>
+            <th scope="row w-50">Phone Number</th>
+            <td class="w-50">01332 934839</td>
+        </tr>
+        <tr>
+            <th scope="row w-50">Email</th>
+            <td class="w-50">info@steelsystems.uk</td>
+        </tr>
+    </tbody>
+</table>
 
+<h3>Contact us for support</h3>
+<table class="table my-4">
+    <tbody>
+        <tr>
+            <th scope="row w-50">Phone Number</th>
+            <td class="w-50">07960 983254</td>
+        </tr>
+        <tr>
+            <th scope="row w-50">Email</th>
+            <td class="w-50">support@steelsystems.uk</td>
+        </tr>
+        <tr>
+            <th scope="row w-50">Website</th>
+            <td class="w-50"><a target="_blank" href="{% url 'users_support' %}">www.pricecare.org/user/support</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Contact us via Social Media</h3>
+<table class="table my-4">
+    <tbody>
+        <tr>
+            <td style="width:33%">
+                <i class="bi bi-facebook"></i>
+                <a class="link-info" href="#" target="_blank">PriceCare</a>            
+            </td>
+            <td style="width:33%">
+                <i class="bi bi-instagram"></i>
+                <a class="link-info" href="#" target="_blank">@steelsystemsuk</a>            
+            </td>
+            <td style="width:33%">
+                <i class="bi bi-twitter"></i>
+                <a class="link-info" href="#" target="_blank">@steelsystemsuk</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>NOTE: Our offices are open Monday to Friday 9am-5pm. If you decided to call and are calling out of these hours, 
+please leave a voicemail and we will get back to you as soon as we can.</p>
+    
 {% endblock %}
